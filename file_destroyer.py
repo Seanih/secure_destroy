@@ -29,11 +29,17 @@ def destroy_files():
         num_files = len(filenames)
         for filename in filenames:
             path = Path(filename)
+            # write to file multiple times
             with open(path, "wb") as file:
                 file.write(b"")
+            with open(path, "wb") as file:
                 file.write(b"bahahahaha!")
+            with open(path, "wb") as file:
                 file.write(b"")
             path.unlink()
+
+            clear_btn.setVisible(False)
+            destroy_btn.setDisabled(1)
             message.setText(f"Successfully destroyed {num_files} file(s)")
     except:
         message.setText("No files were selected or an an error occured.")
